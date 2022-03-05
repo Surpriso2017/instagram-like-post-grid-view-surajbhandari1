@@ -1,208 +1,147 @@
-// import 'package:insta/pageview.dart';
-// import 'package:insta/stack.dart';
-// import 'package:insta/widgets/post_widget.dart';
-// import './stateful.dart';
-// import 'gridview.dart';
-// import 'listview.dart';
-// import 'post_screen.dart';
-import 'tab_bar_view_scree.dart';
 import 'package:flutter/material.dart';
+import 'package:curved_nav_bar/curved_bar/curved_action_bar.dart';
+import 'package:curved_nav_bar/fab_bar/fab_bottom_app_bar_item.dart';
+import 'package:curved_nav_bar/flutter_curved_bottom_nav_bar.dart';
 
-//this is main
-//this is dev
 void main() {
-  runApp(OurApp());
+  runApp(MyApp());
 }
 
-// Stateless , Stateful
-
-class OurApp extends StatelessWidget {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // MaterialApp , CupertinoApp
-
     return MaterialApp(
-        title: "Our app",
-        theme: ThemeData(primarySwatch: Colors.yellow),
-        home: TabScreen()
-        //  OurHomepage(),
-        );
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(title: 'Flutter Demo Home Page'),
+    );
   }
 }
 
-class Our extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  final String title;
+
   @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
-class OurHomepage extends StatelessWidget {
-  final image =
-      'https://i1.wp.com/techweez.com/wp-content/uploads/2020/11/Instagram-Reels.png?resize=768%2C490&ssl=1';
-
-  final scaffoldKey = GlobalKey<ScaffoldState>();
-
+class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-        key: scaffoldKey,
-        drawer: Drawer(),
-        appBar: AppBar(
-          // leading: Icon(Icons.home),
-          title: Text("Our App"),
-          centerTitle: true,
-          actions: [
-            Icon(Icons.message),
-            // Icon(Icons),
-            Icon(Icons.plus_one),
-            Icon(Icons.home),
-          ],
-        ),
-        // drawer: Drawer(),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-        ),
-        body: Container(
-          height: 500,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-
-            // mainAxisSize: MainAxisSize.min,
-            children: [
-              // Container(
-              //   // color: Colors.black,
-              //   child: Column(
-              //     // mainAxisSize: MainAxisSize.min,
-              //     mainAxisAlignment: MainAxisAlignment.center,
-              //     children: [
-              //       MaterialButton(
-              //         onPressed: () {},
-              //         color: Colors.teal,
-              //         // Color(0xff01AB),
-              //         child: Text("PRess me"),
-              //       ),
-              //       MaterialButton(
-              //         onPressed: () {},
-              //         color: Colors.teal,
-              //         // Color(0xff01AB),
-              //         child: Text("PRess me"),
-              //       ),
-              //       MaterialButton(
-              //         onPressed: () {},
-              //         color: Colors.teal,
-              //         // Color(0xff01AB),
-              //         child: Text("PRess me"),
-              //       ),
-              //     ],
-              //   ),
-              // ),
-              // TextButton(
-              //   onPressed: () {},
-              //   // color: Colors.teal,
-              //   // Color(0xff01AB),
-              //   child: Text("PRess me"),
-              // ),
-              // TextField(),
-
-              Row(
-                children: [
-                  Switch(value: true, onChanged: (value) {}),
-                  Switch(value: true, onChanged: (value) {}),
-                  Switch(value: true, onChanged: (value) {}),
-                ],
-              ),
-
-              Container(
-                height: 300,
-                width: 300,
-
-                // alignment: Alignment.center,
-                // padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  // color: Colors.yellow,
-                  border: Border.all(),
-                  gradient: LinearGradient(
-                      colors: [Colors.yellow, Colors.white],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter),
-                  borderRadius: BorderRadius.circular(50),
-                  // shape: BoxShape.circle,
-                ),
-                // child: Container(
-                //   height: 100,
-                //   width: 200,
-                //   margin: EdgeInsets.all(15),
-                //   color: Colors.pink,
-                // )
-                //  Center(child: Text("this is container")),
-              ),
-
-              Switch(value: true, onChanged: (value) {}),
-
-              // GestureDetector(
-              //   onTap: () {
-              //     print("single clicked on tap");
-              //   },
-              //   onDoubleTap: () {
-              //     print(" i am double tapped");
-              //   },
-              //   child: Image.network(image),
-              // )
-            ],
+    return CurvedNavBar(
+      actionButton: CurvedActionBar(
+          onTab: (value) {
+            /// perform action here
+            print(value);
+          },
+          activeIcon: Container(
+            padding: EdgeInsets.all(8),
+            decoration:
+                BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+            child: Icon(
+              Icons.camera_alt,
+              size: 50,
+              color: Colors.orange,
+            ),
           ),
-        )
-
+          inActiveIcon: Container(
+            padding: EdgeInsets.all(8),
+            decoration:
+                BoxDecoration(color: Colors.white70, shape: BoxShape.circle),
+            child: Icon(
+              Icons.camera_alt_outlined,
+              size: 50,
+              color: Colors.orange,
+            ),
+          ),
+          text: "Camera"),
+      activeColor: Colors.blue,
+      navBarBackgroundColor: Colors.limeAccent,
+      inActiveColor: Colors.black45,
+      appBarItems: [
+        FABBottomAppBarItem(
+            activeIcon: Icon(
+              Icons.home,
+              color: Colors.blue,
+            ),
+            inActiveIcon: Icon(
+              Icons.home,
+              color: Colors.black26,
+            ),
+            text: 'Home'),
+        FABBottomAppBarItem(
+            activeIcon: Icon(
+              Icons.wallet_giftcard,
+              color: Colors.blue,
+            ),
+            inActiveIcon: Icon(
+              Icons.person,
+              color: Colors.black26,
+            ),
+            text: 'Profile'),
+      ],
+      bodyItems: [
+        Container(
+          height: MediaQuery.of(context).size.height,
+          color: Colors.blue,
+        ),
         // Container(
-        //   color: Colors.green,
-        //   child: ListView(
-        //     scrollDirection: Axis.horizontal,
-        //     children: [
-        //       Image.network(image),
-        //       Image.network(image),
-        //       Image.network(image),
-        //       Image.network(image),
-        //       Image.network(image),
-        //       Image.network(image),
-        //       Image.network(image),
-        //       Icon(Icons.message),
-        //       Icon(Icons.message),
-        //       Icon(Icons.message),
-        //       Icon(Icons.message),
-        //       Icon(Icons.message),
-        //     ],
-        //   ),
-        // ),
+        //wallet starts..
+        GridView.count(
+          // Create a grid with 2 columns. If you change the scrollDirection to
+          // horizontal, this produces 2 rows.
+          crossAxisCount: 3,
 
-        );
+          // Generate 100 widgets that display their index in the List.
+          children: [
+            Container(
+                margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                child: Image.asset("1.jpg")),
+            Container(
+                margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                child: Image.asset("2.jpeg")),
+            Container(
+                margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                child: Image.asset("1.jpg")),
+            Container(
+                margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                child: Image.asset("2.jpeg")),
+            Container(
+                margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                child: Image.asset("1.jpg")),
+            Container(
+                margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                child: Image.asset("2.jpeg")),
+            Container(
+                margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                child: Image.asset("1.jpg")),
+            Container(
+                margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                child: Image.asset("2.jpeg")),
+            Container(
+                margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                child: Image.asset("1.jpg")),
+            Container(
+                margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                child: Image.asset("2.jpeg")),
+            Container(
+                margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                child: Image.asset("1.jpg")),
+            Container(
+                margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                child: Image.asset("2.jpeg")),
+          ],
+          //wallet ends...
+        ),
+      ],
+      actionBarView: Container(
+        height: MediaQuery.of(context).size.height,
+        color: Colors.orange,
+      ),
+    );
   }
 }
-
-
-
-
-
-
-/// 1. Container = just a box (4 corner)
-/// 2. Text , RichText  = for showing text
-/// 3. Row / Column = Layout , horizaontal or vertical
-/// 
-/// 4. ListView/ SingleChildScrollView/ GridView = Scrollable view 
-
-/// 5. MaterialButton/ TextButton  = pre built buttons 
-/// 6. GestureDetector/ InkWell = Make anything clicakble  or hadle users gestures 
-/// 6. Icon = To how icons in the app 
-
-/// 5. TabView, PageView, BottomNavBar 
-/// 7. Padding/ SizedBox/ FiteedBox
-/// 8. Image(asset, file, network), FadeInImage = to show image 
-/// 9. Form, TextField, TextFormField = Form and inputs 
-/// 10. Stack 
-/// 11. ClipRRect , SafeArea
-
-
-/// leading
-/// suffix
-/// prefix
-/// trailing
